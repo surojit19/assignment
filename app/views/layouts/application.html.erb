@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Assignment</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  <div class="container">
+
+    <div class="row">
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to('<span class="glyphicon glyphicon-home"></span> Home'.html_safe, '/') %>
+        </li>
+        <li>
+          <%= link_to('<span class="glyphicon glyphicon-cog"></span> Secret Codes'.html_safe, '/secret_code') %>
+        </li>
+        <% if current_user %>
+        <li>
+          <%= link_to('<span class="glyphicon glyphicon-off"></span> Log out'.html_safe, destroy_user_session_path, method: 'delete') %>
+        </li>
+        <% else %>
+        <li>
+          <%= link_to('<span class="glyphicon glyphicon-log-in"></span> Login'.html_safe, new_user_session_path) %>
+        </li>  
+        <li>
+          <%= link_to('<span class="glyphicon glyphicon-saved"></span> Register'.html_safe, new_user_registration_path) %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
+    <%= yield %>
+
+
+    </div>
+  </body>
+</html>

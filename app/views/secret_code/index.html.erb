@@ -1,0 +1,53 @@
+<div class="row">
+  
+  <div class="col-sm-6">
+    <h2>Secret Code List</h2>
+  </div>
+
+  <div class="col-sm-6 text-right">
+    
+    <div style="float:right">
+    
+      <%= form_for(SecretCode, as: "secret_code", url: '/secret_code/generate') do |f| %>
+          
+          <div class="row">
+            <div class="col-sm-6">
+              <select name="records" class="form-control">
+                <% [1,10,20,50,100].each{ |r|%>
+                  <option <%= r==10 ? "selected" : ""%>><%= r%></option>  
+                <% } %>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <input type="submit" class="btn btn-warning" value="Generate Codes" />
+            </div>
+          </div>
+       <% end %> 
+    </div>
+  </div>
+
+
+<div class="table-responsive">
+  <table class="table table-stripped">
+    <tr>      
+      <th>Code</th>
+      <th>User Associated</th>
+    </tr>
+    
+    <% if @scodes.count == 0 %>
+
+    <tr><td colspan=2>No Secret codes found!</td></tr>
+
+    <% end %>
+
+
+    <% @scodes.each {|scode| %>
+
+      <tr>
+        <td><%= scode.code%></td>
+        <td><%= scode.user ? scode.user.email : ' - '%></td>
+      </tr>  
+    
+    <% } %>
+  </table>
+</div>
